@@ -41,13 +41,11 @@ loginForm.addEventListener('submit', (event) => {
             login: inputLogin.value,
             password: inputPassword.value
         }
+        localStorage.setItem('user', JSON.stringify(user))
         login(user)
     } else {
         alert('Логин\/пароль не введен')
     }
-
-
-    localStorage.setItem('user', JSON.stringify(user))
 })
 
 buttonOut.addEventListener('click', () => {
