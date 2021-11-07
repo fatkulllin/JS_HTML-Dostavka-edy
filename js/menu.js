@@ -1,10 +1,8 @@
 const renderItems = data=>{
-    data.forEach(element => {
-        // console.log(element)
-    });
+    console.log(data)
 }
 
-fetch('https://test-dostavka-edy-default-rtdb.firebaseio.com/db/partners.json')
+fetch('https://test-dostavka-edy-default-rtdb.firebaseio.com/db/tanuki.json')
 .then(response=>response.json())
 .then(data=>{
     renderItems(data)
