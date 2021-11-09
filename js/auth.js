@@ -1,57 +1,63 @@
-let buttonAuth = document.querySelector('.button-auth')
-let modalAuth = document.querySelector('.modal-auth')
-let buttonOut = document.querySelector('.button-out')
-let userName = document.querySelector('.user-name')
-let closeAuth = document.querySelector('.close-auth')
-let loginForm = document.getElementById('logInForm')
-let inputLogin = document.getElementById('login')
-let inputPassword = document.getElementById('password')
+const auth = () => {
+    let buttonAuth = document.querySelector('.button-auth')
+    let modalAuth = document.querySelector('.modal-auth')
+    let buttonOut = document.querySelector('.button-out')
+    let userName = document.querySelector('.user-name')
+    let closeAuth = document.querySelector('.close-auth')
+    let loginForm = document.getElementById('logInForm')
+    let inputLogin = document.getElementById('login')
+    let inputPassword = document.getElementById('password')
+    let buttonCart = document.querySelector('.button-cart')
 
-let login = user => {
-    buttonAuth.style.display = 'none'
+    let login = user => {
+        buttonAuth.style.display = 'none'
 
-    buttonOut.style.display = 'flex'
-    userName.style.display = 'flex'
+        buttonOut.style.display = 'flex'
+        userName.style.display = 'flex'
+        buttonCart.style.display = 'flex'
 
-    userName.textContent = user.login
-    modalAuth.style.display = 'none'
-}
-
-let logout = () => {
-    buttonAuth.style.display = 'flex'
-
-    buttonOut.style.display = 'none'
-    userName.textContent = ''
-    userName.style.display = 'none'
-    localStorage.removeItem('user')
-}
-
-buttonAuth.addEventListener('click', () => {
-    modalAuth.style.display = 'flex'
-})
-
-closeAuth.addEventListener('click', () => {
-    modalAuth.style.display = 'none'
-})
-
-loginForm.addEventListener('submit', (event) => {
-    event.preventDefault()
-    if (inputLogin.value != ''&& inputPassword.value != '') {
-        const user = {
-            login: inputLogin.value,
-            password: inputPassword.value
-        }
-        localStorage.setItem('user', JSON.stringify(user))
-        login(user)
-    } else {
-        alert('Логин\/пароль не введен')
+        userName.textContent = user.login
+        modalAuth.style.display = 'none'
     }
-})
 
-buttonOut.addEventListener('click', () => {
-    logout()
-})
+    let logout = () => {
+        buttonAuth.style.display = 'flex'
 
-if (localStorage.getItem('user')) {
-    login(JSON.parse(localStorage.getItem('user')))
+        buttonOut.style.display = 'none'
+        userName.textContent = ''
+        userName.style.display = 'none'
+        buttonCart.style.display = 'none'
+        localStorage.removeItem('user')
+    }
+
+    buttonAuth.addEventListener('click', () => {
+        modalAuth.style.display = 'flex'
+    })
+
+    closeAuth.addEventListener('click', () => {
+        modalAuth.style.display = 'none'
+    })
+
+    loginForm.addEventListener('submit', (event) => {
+        event.preventDefault()
+        if (inputLogin.value != '' && inputPassword.value != '') {
+            const user = {
+                login: inputLogin.value,
+                password: inputPassword.value
+            }
+            localStorage.setItem('user', JSON.stringify(user))
+            login(user)
+        } else {
+            alert('Логин\/пароль не введен')
+        }
+    })
+
+    buttonOut.addEventListener('click', () => {
+        logout()
+    })
+
+    if (localStorage.getItem('user')) {
+        login(JSON.parse(localStorage.getItem('user')))
+    }
 }
+auth()
